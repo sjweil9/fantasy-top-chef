@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  qf_win_pts: 
+  qf_fav_pts: 
+  elim_win_pts: 
+  elim_top_pts: 
+  elim_bottom_pts: 
+  lck_win_pts: 
+  lck_champ_pts: 
+  champ_pts: 
+  finale_pts: 
+
+two:
+  qf_win_pts: 
+  qf_fav_pts: 
+  elim_win_pts: 
+  elim_top_pts: 
+  elim_bottom_pts: 
+  lck_win_pts: 
+  lck_champ_pts: 
+  champ_pts: 
+  finale_pts: 

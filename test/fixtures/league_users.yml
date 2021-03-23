@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  league: one
+  user: one
+  is_manager: false
+  team_name: MyString
+
+two:
+  league: two
+  user: two
+  is_manager: false
+  team_name: MyString
