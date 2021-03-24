@@ -12,7 +12,7 @@
 <div class="welcome">
   <div id="overlay">
     <form action="<%= register_path %>" id="register" method="post" class="mobile-max-width">
-      <h1>Haven't registered yet, you lazy fuck?</h1>
+      <h1>Make an Account</h1>
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <div class="form-group">
         <input type="email" class="form-control" name="user[email]" placeholder="Email Address">
@@ -33,7 +33,7 @@
     </form>
 
     <form action="<%= user_session_path %>" id="login" method="post" class="mobile-max-width">
-      <h1>Which one of you assholes is this?</h1>
+      <h1>Sign In</h1>
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
       <div class="form-group">
         <input type="email" class="form-control" name="user[email]" placeholder="Email Address">
