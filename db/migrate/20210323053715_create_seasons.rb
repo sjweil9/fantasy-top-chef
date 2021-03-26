@@ -5,6 +5,7 @@ class CreateSeasons < ActiveRecord::Migration[6.0]
       t.date :end_date
       t.string :name
       t.integer :season_year
+      t.integer :season_number
 
       t.timestamps
     end
