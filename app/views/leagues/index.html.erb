@@ -1,1 +1,16 @@
-<h1>Hello World</h1>
+<div class="container-fluid">
+  <div class="row justify-content-center margin-below">
+    <div class="col-xs-12 col-lg-6">
+      <h1>My Leagues</h1>
+      <ul class="knives">
+        <% @user_leagues.each do |league| %>
+          <li><a href="<%= league_path(league.guid) %>"><%= league.name %></a> (<%= render "shared/season_name", season: league.season %>)</li>
+        <% end %>
+      </ul>
+      <div>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#add_league">Create New League</button>
+        <%= render "leagues/create_league" %>
+      </div>
+    </div>
+  </div>
+</div>

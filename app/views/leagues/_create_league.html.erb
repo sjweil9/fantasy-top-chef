@@ -1,0 +1,59 @@
+<div class="modal fade" id="add_league" tabindex="-1" role="dialog" aria-labelledby="add_league_label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add_league_label">Create New League</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="<%= leagues_path %>" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label" for="league-name">League Name:</label>
+            <div class="col-sm-7">
+              <input type="text" id="league-name" name="league[name]">
+              <%= render "shared/errors", type: "name" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label" for="max-players">Max Players:</label>
+            <div class="col-sm-7">
+              <input type="number" step="1" value=7 id="max-players" name="league[max_players]">
+              <%= render "shared/errors", type: "max_players" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label" for="password">Add Password:</label>
+            <div class="col-sm-7">
+              <input type="password" id="password" name="league[password]" placeholder="Leave blank for public">
+              <%= render "shared/errors", type: "password" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label" for="password_confirmation">Confirm Password:</label>
+            <div class="col-sm-7">
+              <input type="password" id="password_confirmation" name="league[password_confirmation]">
+              <%= render "shared/errors", type: "password_confirmation" %>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label" for="season">Season:</label>
+            <div class="col-sm-7">
+              <select class="custom-select mr-sm-2" id="season" name="league[season_id]">
+                <% @seasons.each do |season| %>
+                  <option value="<%= season.id %>"><%= render "shared/season_name", season: season %></option>
+                <% end %>
+              </select>
+              <%= render "shared/errors", type: "season_id" %>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            <button class="btn btn-primary" type="submit">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

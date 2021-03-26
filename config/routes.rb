@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  root to: "leagues#index"
+  root to: 'leagues#index', as: 'home'
 
   post '/users', to: 'users#create', as: 'register'
   post '/sessions', to: 'sessions#create', as: 'login'
+
+  resources :leagues, only: %i[index show create]
 
   devise_for :users
 

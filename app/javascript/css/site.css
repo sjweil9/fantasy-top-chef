@@ -225,3 +225,14 @@ h1 {
         min-width: 60%;
     }
 }
+
+ul.knives {
+    list-style: none;
+}
+
+ul.knives li::before {
+    content: url("~knife.png");
+    display: inline-block;
+    transform: translateY(35%);
+    margin-right: 1.5vw;
+}

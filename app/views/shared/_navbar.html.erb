@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary margin-below">
+  <div class="container">
+    <a class="main-title navbar-brand" href="<%= home_path %>">FantasyTopChef</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar1">
+      <ul class="navbar-nav nav nav-fill w-100">
+        <li class="nav-item">
+          <a class="<%= (current_page?(home_path) || current_page?(leagues_path)) ? 'active' : 'nav-item' %> nav-link" href="<%= leagues_path %>">Leagues</a>
+        </li>
+        <li class="nav-item">
+          <a class="<%= current_page?(destroy_user_session_path) ? 'active' : 'nav-item' %> nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Sign Out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<% if flash[:banner_error] %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="alert alert-danger" role="alert"><%= flash[:banner_error] %></div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if flash[:banner_success] %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="alert alert-success" role="alert"><%= flash[:banner_success] %></div>
+      </div>
+    </div>
+  </div>
+<% end %>
