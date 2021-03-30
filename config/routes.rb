@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create', as: 'register'
   post '/sessions', to: 'sessions#create', as: 'login'
 
-  resources :leagues, only: %i[index show create] do
+  resources :leagues, only: %i[index show create edit] do
     resources :teams, only: %i[show]
   end
 

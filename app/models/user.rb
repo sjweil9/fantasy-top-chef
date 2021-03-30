@@ -7,4 +7,8 @@ class User < ApplicationRecord
 
   has_many :league_users
   has_many :leagues, through: :league_users
+
+  def is_manager?(league)
+    LeagueUser.where(league_id: league.id, user_id: id, is_manager: true).count.positive?
+  end
 end

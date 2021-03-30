@@ -8,6 +8,10 @@ class LeaguesController < ApplicationController
     @league = League.find_by(guid: params[:id])
   end
 
+  def edit
+    @league = League.find_by(guid: params[:id])
+  end
+
   def create
     league = League.new(league_params)
     if league.save
