@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  league_user: one
+  chef: one
+  pick_number: 1
+
+two:
+  league_user: two
+  chef: two
+  pick_number: 1

@@ -5,6 +5,7 @@ class CreateLeagueUsers < ActiveRecord::Migration[6.0]
       t.references :user, null: false, foreign_key: true
       t.boolean :is_manager
       t.string :team_name
+      t.float :total_points, default: 0.0
 
       t.timestamps
     end

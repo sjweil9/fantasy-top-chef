@@ -10,6 +10,8 @@ class CreateScoringSystems < ActiveRecord::Migration[6.0]
       t.numeric :lck_champ_pts
       t.numeric :champ_pts
       t.numeric :finale_pts
+      t.numeric :sweep_pts
+      t.string :name
 
       t.timestamps
     end

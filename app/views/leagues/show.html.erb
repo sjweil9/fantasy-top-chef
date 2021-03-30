@@ -1,1 +1,78 @@
-<h1>A League Page</h1>
+<div class="container-fluid">
+  <div class="row justify-content-center margin-below">
+    <div class="col-xs-12 col-lg-6">
+      <h1><%= @league.name %></h1>
+    </div>
+  </div>
+  <div class="row justify-content-center margin-below">
+    <div class="col-12">
+      <h1>Team Leaderboard</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Team</th>
+            <th scope="col">Chefs</th>
+            <th scope="col">Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @league.teams_in_rank_order.each_with_index do |team, index| %>
+            <tr>
+              <th scope="row"><%= (index + 1).ordinalize %></th>
+              <th><%= render "shared/team_link", team: team %></th>
+              <th></th>
+              <th><%= team.total_points %></th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12">
+      <h1>Chef Leaderboard</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Chef</th>
+            <th scope="col">Team</th>
+            <th scope="col">Points</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @league.chefs_in_rank_order.each_with_index do |chef, index| %>
+          <tr>
+            <th scope="row"><%= (index + 1).ordinalize %></th>
+            <th><%= render "shared/chef_link", chef: chef %></th>
+            <th></th>
+            <th><%= @league.scoring_system.season_points_for(chef) %></th>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12">
+      <h1>Weekly Scoring By Team</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <% @league.season.episodes.order(week: :asc).each do |episode| %>
+              <th scope="col">Week <%= episode.week %></th>
+            <% end %>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @league.teams_in_rank_order.each do |team| %>
+          <th scope="row"><%= render "shared/team_link", team: team %></th>
+          <% team.episode_chefs.joins(:episode).order(week: :asc).each_slice(@league.team_size) do |episode_chefs| %>
+            <th><%= @league.scoring_system.points_for(episode_chefs) %></th>
+          <% end %>
+          <th scope="row"><%= team.total_points %></th>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
