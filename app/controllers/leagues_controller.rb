@@ -20,6 +20,17 @@ class LeaguesController < ApplicationController
     end
   end
 
+  def update
+    if league.update(update_params)
+      flash[:banner_success] = "Successfully updated league settings."
+    else
+      flash[:banner_error] = "Failed to update league settings."
+      process_errors(league)
+    end
+
+    redirect_to edit_league_path(league.guid)
+  end
+
   def join
     if current_user.is_member?(league)
       flash[:banner_success] = "You've already joined #{league.name}."
@@ -56,6 +67,10 @@ class LeaguesController < ApplicationController
 
   def league_params
     params.require(:league).permit(:name, :season_id, :password, :password_confirmation, :max_players)
+  end
+
+  def update_params
+    params.require(:league).permit(:name, :password, :password_confirmation, :max_players)
   end
 
   def league

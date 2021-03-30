@@ -1,1 +1,54 @@
-<h1>League Edit Page</h1>
+<div class="container-fluid">
+  <div class="row justify-content-center margin-below">
+    <div class="col-xs-12 col-lg-6">
+      <h1><%= @league.name %> Settings</h1>
+      <a href="<%= league_path(@league.guid) %>">Return to League</a>
+    </div>
+  </div>
+  <div class="row justify-content-center margin-below">
+    <div class="col-xs-12 col-lg-6">
+      <h1>League Settings</h1>
+      <form action="<%= league_path(@league.guid) %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="put">
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label" for="league-name">League Name:</label>
+          <div class="col-sm-7">
+            <input type="text" id="league-name" name="league[name]" value="<%= @league.name %>">
+            <%= render "shared/errors", type: "name" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label" for="max-players">Max Players:</label>
+          <div class="col-sm-7">
+            <input type="number" step="1" value=<%= @league.max_players %> id="max-players" name="league[max_players]">
+            <%= render "shared/errors", type: "max_players" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label" for="password">Update Password:</label>
+          <div class="col-sm-7">
+            <input type="password" id="password" name="league[password]" placeholder="Leave blank for public OR to not change">
+            <%= render "shared/errors", type: "password" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label" for="password_confirmation">Confirm New Password:</label>
+          <div class="col-sm-7">
+            <input type="password" id="password_confirmation" name="league[password_confirmation]">
+            <%= render "shared/errors", type: "password_confirmation" %>
+          </div>
+        </div>
+        <div class="col-sm-10">
+          <button class="btn btn-primary" type="submit">Update</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-6 col-xs-12">
+      <h1>Draft Settings</h1>
+      <form action="<%= draft_settings_league_path(@league.guid) %>" method="POST">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      </form>
+    </div>
+  </div>
+</div>

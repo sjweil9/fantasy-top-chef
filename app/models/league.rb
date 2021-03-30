@@ -8,6 +8,7 @@ class League < ApplicationRecord
 
   validates :name, :guid, presence: true
   validates :max_players, numericality: { only_integer: true, greater_than: 1 }
+  validate :player_count_allowed!
 
   has_many :league_users, dependent: :destroy
   has_many :users, through: :league_users, dependent: :destroy
@@ -50,5 +51,11 @@ class League < ApplicationRecord
 
     default_system = ScoringSystem.find_by!(name: "Default Scoring")
     LeagueScoringSystem.create!(league: self, scoring_system: default_system)
+  end
+
+  def player_count_allowed!
+    return if league_users.count <= max_players
+
+    errors.add(:max_players, "cannot be reduced to the requested amount as there are already too many members.")
   end
 end
