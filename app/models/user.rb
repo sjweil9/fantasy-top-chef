@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def is_manager?(league)
     LeagueUser.where(league_id: league.id, user_id: id, is_manager: true).count.positive?
   end
+
+  def is_member?(league)
+    LeagueUser.where(league_id: league.id, user_id: id).count.positive?
+  end
 end

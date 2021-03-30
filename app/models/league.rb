@@ -1,7 +1,7 @@
 class League < ApplicationRecord
   belongs_to :season
 
-  has_secure_password
+  has_secure_password validations: false
 
   before_validation :set_guid!, on: :create
   after_create :set_default_scoring!
@@ -11,8 +11,8 @@ class League < ApplicationRecord
 
   has_many :league_users, dependent: :destroy
   has_many :users, through: :league_users, dependent: :destroy
-  has_one :league_scoring_system
-  has_one :scoring_system, through: :league_scoring_system
+  has_one :league_scoring_system, dependent: :destroy
+  has_one :scoring_system, through: :league_scoring_system, dependent: :destroy
   
   def teams_in_rank_order
     @teams_in_rank_order ||= league_users.joins(:user).order(total_points: :desc).all
@@ -24,6 +24,14 @@ class League < ApplicationRecord
 
   def team_size
     season.chefs.count / max_players
+  end
+
+  def private?
+    password_digest.present?
+  end
+
+  def at_max_players?
+    league_users.count >= max_players
   end
 
   private

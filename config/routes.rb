@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   post '/sessions', to: 'sessions#create', as: 'login'
 
   resources :leagues, only: %i[index show create edit] do
-    resources :teams, only: %i[show]
+    member do
+      get :join
+    end
+    resources :teams, only: %i[show create]
   end
 
   devise_for :users

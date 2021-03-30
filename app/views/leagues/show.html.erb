@@ -5,6 +5,11 @@
       <% if current_user.is_manager?(@league) %>
         <a href="<%= edit_league_path(@league.guid) %>">Edit League Settings</a>
       <% end %>
+      <% if !@league.private? && !current_user.is_member?(@league) %>
+        <a href="<%= join_league_path(@league.guid) %>">Join This League?</a>
+      <% else %>
+        <a href="<%= league_team_path(@league.guid, @user_team.id) %>">Edit Team Settings</a>
+      <% end %>
     </div>
   </div>
   <div class="row justify-content-center margin-below">

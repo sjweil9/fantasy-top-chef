@@ -6,4 +6,6 @@ class LeagueUser < ApplicationRecord
   has_many :chefs, through: :league_user_chefs
 
   has_many :episode_chefs, through: :chefs
+
+  validates :team_name, presence: true
 end

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row justify-content-center margin-below">
+    <div class="col-xs-12 col-lg-6">
+      <h3>Please confirm to join "<%= @league.name %>":</h3>
+      <form action="<%= league_teams_path(@league.guid) %>" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <% if @league.private? %>
+          <div class="form-group row">
+            <label class="col-sm-5 col-form-label" for="password">League Password:</label>
+            <div class="col-sm-7">
+              <input type="password" id="password" name="password">
+              <%= render "shared/errors", type: "password" %>
+            </div>
+          </div>
+        <% end %>
+        <div class="form-group row">
+          <label class="col-sm-5 col-form-label" for="password">Team Name:</label>
+          <div class="col-sm-7">
+            <input type="text" id="team_name" name="team_name" value="<%= current_user.name %>'s Team">
+            <%= render "shared/errors", type: "team_name" %>
+          </div>
+        </div>
+        <div class="col-sm-10">
+          <button class="btn btn-primary" type="submit">Confirm</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
