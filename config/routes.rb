@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :leagues, only: %i[index show create edit] do
     member do
       get :join
+      get :draft
     end
     resources :teams, only: %i[show create]
   end

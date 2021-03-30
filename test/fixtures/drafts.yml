@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  league: one
+  starts_at: 2021-03-30 12:55:06
+  pick_order: 
+  current_pick_user_id: 1
+
+two:
+  league: two
+  starts_at: 2021-03-30 12:55:06
+  pick_order: 
+  current_pick_user_id: 1

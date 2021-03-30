@@ -13,6 +13,7 @@ class League < ApplicationRecord
   has_many :users, through: :league_users, dependent: :destroy
   has_one :league_scoring_system, dependent: :destroy
   has_one :scoring_system, through: :league_scoring_system, dependent: :destroy
+  has_one :draft
   
   def teams_in_rank_order
     @teams_in_rank_order ||= league_users.joins(:user).order(total_points: :desc).all
@@ -32,6 +33,10 @@ class League < ApplicationRecord
 
   def at_max_players?
     league_users.count >= max_players
+  end
+
+  def draft_completed?
+    draft&.completed?
   end
 
   private

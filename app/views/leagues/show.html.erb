@@ -9,6 +9,9 @@
         <a href="<%= join_league_path(@league.guid) %>">Join This League?</a>
       <% else %>
         <a href="<%= league_team_path(@league.guid, @user_team.id) %>">Edit Team Settings</a>
+        <% if !@league.draft_completed? && @league.draft&.started? %>
+          <a href="<%= draft_league_path(@league.guid) %>"></a>
+        <% end %>
       <% end %>
     </div>
   </div>

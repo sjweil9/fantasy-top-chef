@@ -5,31 +5,26 @@ class LeaguesController < ApplicationController
   end
 
   def show
-    @league = League.find_by(guid: params[:id])
-    @user_team = @league.users.detect { |user| user.id == current_user.id }
+    @user_team = league.users.detect { |user| user.id == current_user.id }
 
-    if @league.private? && !current_user.is_member?(@league)
+    if league.private? && !current_user.is_member?(league)
       flash[:banner_error] = "Sorry, this league is private."
       redirect_to home_path
     end
   end
 
   def edit
-    @league = League.find_by(guid: params[:id])
-
-    unless current_user.is_manager?(@league)
+    unless current_user.is_manager?(league)
       flash[:banner_error] = "Only the League Manager can edit settings."
-      redirect_to league_path(@league.guid)
+      redirect_to league_path(league.guid)
     end
   end
 
   def join
-    @league = League.find_by(guid: params[:id])
-
-    if current_user.is_member?(@league)
-      flash[:banner_success] = "You've already joined #{@league.name}."
-      redirect_to league_path(@league.guid)
-    elsif @league.at_max_players?
+    if current_user.is_member?(league)
+      flash[:banner_success] = "You've already joined #{league.name}."
+      redirect_to league_path(league.guid)
+    elsif league.at_max_players?
       flash[:banner_error] = "Sorry, that league is already full."
       redirect_to home_path
     end
@@ -53,9 +48,17 @@ class LeaguesController < ApplicationController
     redirect_to home_path
   end
 
+  def draft
+    @draft = league.draft
+  end
+
   private
 
   def league_params
     params.require(:league).permit(:name, :season_id, :password, :password_confirmation, :max_players)
+  end
+
+  def league
+    @league ||= League.find_by(guid: params[:id])
   end
 end

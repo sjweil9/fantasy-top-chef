@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_030725) do
+ActiveRecord::Schema.define(version: 2021_03_30_175506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2021_03_30_030725) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["season_id"], name: "index_chefs_on_season_id"
+  end
+
+  create_table "drafts", force: :cascade do |t|
+    t.bigint "league_id", null: false
+    t.datetime "starts_at"
+    t.datetime "ended_at"
+    t.json "pick_order"
+    t.integer "current_pick_user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["league_id"], name: "index_drafts_on_league_id"
   end
 
   create_table "episode_chefs", force: :cascade do |t|
@@ -145,6 +156,7 @@ ActiveRecord::Schema.define(version: 2021_03_30_030725) do
   end
 
   add_foreign_key "chefs", "seasons"
+  add_foreign_key "drafts", "leagues"
   add_foreign_key "episode_chefs", "chefs"
   add_foreign_key "episode_chefs", "episodes"
   add_foreign_key "episodes", "seasons"
