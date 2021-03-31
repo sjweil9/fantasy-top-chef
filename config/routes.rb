@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     member do
       get :join
       get :draft
-      post :draft_settings
+      post :randomize_draft_order
     end
     resources :teams, only: %i[show create]
   end

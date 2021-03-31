@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2021_03_30_175506) do
 
   create_table "drafts", force: :cascade do |t|
     t.bigint "league_id", null: false
-    t.datetime "starts_at"
     t.datetime "ended_at"
     t.json "pick_order"
     t.integer "current_pick_user_id"

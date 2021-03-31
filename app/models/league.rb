@@ -24,6 +24,12 @@ class League < ApplicationRecord
     @chefs_in_rank_order ||= season.chefs.sort_by { |chef| -scoring_system.season_points_for(chef) }
   end
 
+  def players_in_draft_order
+    @players_in_draft_order ||= draft&.pick_order&.map do |id|
+      league_users.detect { |lu| lu.user_id == id }
+    end || []
+  end
+
   def team_size
     season.chefs.count / max_players
   end

@@ -46,9 +46,13 @@
     </div>
     <div class="col-lg-6 col-xs-12">
       <h1>Draft Settings</h1>
-      <form action="<%= draft_settings_league_path(@league.guid) %>" method="POST">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      </form>
+      <h3>Pick Order:</h3>
+      <ul class="knives">
+        <% @draft_order.each do |team| %>
+          <li><%= render "shared/team_link", team: team %></li>
+        <% end %>
+      </ul>
+      <a class="btn btn-primary" href="<%= randomize_draft_order_league_path(@league.guid) %>" data-method="post">Randomize Draft Order</a>
     </div>
   </div>
 </div>

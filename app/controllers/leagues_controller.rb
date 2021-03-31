@@ -1,4 +1,7 @@
 class LeaguesController < ApplicationController
+
+  before_action :check_manager!, only: %i[edit update randomize_draft_order]
+
   def index
     @user_leagues = current_user.leagues
     @seasons = Season.all
@@ -14,10 +17,7 @@ class LeaguesController < ApplicationController
   end
 
   def edit
-    unless current_user.is_manager?(league)
-      flash[:banner_error] = "Only the League Manager can edit settings."
-      redirect_to league_path(league.guid)
-    end
+    @draft_order = league.players_in_draft_order
   end
 
   def update
@@ -63,6 +63,14 @@ class LeaguesController < ApplicationController
     @draft = league.draft
   end
 
+  def randomize_draft_order
+    random_order = league.league_users.shuffle.map(&:user_id)
+    league.draft ||= Draft.create!(league: league)
+    league.draft.update(pick_order: random_order, current_pick_user_id: random_order.first)
+
+    redirect_to edit_league_path(league.guid)
+  end
+
   private
 
   def league_params
@@ -75,5 +83,12 @@ class LeaguesController < ApplicationController
 
   def league
     @league ||= League.find_by(guid: params[:id])
+  end
+
+  def check_manager!
+    unless current_user.is_manager?(league)
+      flash[:banner_error] = "Only the League Manager can edit settings."
+      redirect_to league_path(league.guid)
+    end
   end
 end
