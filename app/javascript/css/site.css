@@ -236,3 +236,25 @@ ul.knives li::before {
     transform: translateY(35%);
     margin-right: 1.5vw;
 }
+.pick-order-box {
+    border: 1px solid black;
+    padding: 4px;
+}
+
+.current-pick {
+    background-color: #28a745;
+}
+
+.my-pick {
+    background-color: #17a2b8;
+}
+
+.pick-order-row {
+    margin-bottom: 1.5%;
+}
+
+.horizontal-scroll-row {
+    overflow: auto;
+    white-space: nowrap;
+    height: 200px;
+}

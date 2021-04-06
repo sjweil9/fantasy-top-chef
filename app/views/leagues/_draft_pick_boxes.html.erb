@@ -1,0 +1,15 @@
+<div class="row pick-order-row horizontal-scroll-row">
+
+  <% pick_order.each_with_index do |team, idx| %>
+    <div
+      class="col-1 pik-order-box <%= idx + 1 < current_pick_number ? 'current-pick' : '' %>"
+    >
+      <div class="row">
+        <div class="col-6">
+          <h6><b><%= team.name %></b></h6>
+          <h6>Pick <%= draft.current_pick + idx %></h6>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

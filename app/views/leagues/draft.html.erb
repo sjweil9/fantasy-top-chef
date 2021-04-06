@@ -1,0 +1,8 @@
+<div class="container-fluid">
+  <div class="row justify-content-center margin-below">
+    <div class="col-12">
+      <h3>Round <%= @draft.round %></h3>
+      <%= render "leagues/draft_pick_boxes", pick_order: @pick_order, draft: @draft, current_pick_number: @current_pick_number %>
+    </div>
+  </div>
+</div>

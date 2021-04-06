@@ -12,6 +12,8 @@ class League < ApplicationRecord
 
   has_many :league_users, dependent: :destroy
   has_many :users, through: :league_users, dependent: :destroy
+  has_many :league_user_chefs, through: :league_users
+  has_many :chefs, through: :league_user_chefs
   has_one :league_scoring_system, dependent: :destroy
   has_one :scoring_system, through: :league_scoring_system, dependent: :destroy
   has_one :draft

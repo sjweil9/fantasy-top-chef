@@ -4,4 +4,8 @@ class Draft < ApplicationRecord
   def completed?
     ended_at.present?
   end
+
+  def round
+    
+  end
 end

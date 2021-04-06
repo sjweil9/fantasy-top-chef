@@ -61,12 +61,15 @@ class LeaguesController < ApplicationController
 
   def draft
     @draft = league.draft
+    @pick_order = league.players_in_draft_order
+    @current_pick_number = league.chefs.size + 1
   end
 
   def randomize_draft_order
     random_order = league.league_users.shuffle.map(&:user_id)
+    pick_order = random_order + random_order.reverse
     league.draft ||= Draft.create!(league: league)
-    league.draft.update(pick_order: random_order, current_pick_user_id: random_order.first)
+    league.draft.update(pick_order: pick_order, current_pick_user_id: pick_order.first)
 
     redirect_to edit_league_path(league.guid)
   end

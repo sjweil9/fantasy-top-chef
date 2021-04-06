@@ -10,7 +10,7 @@
       <% else %>
         <a href="<%= league_team_path(@league.guid, @user_team.id) %>">Edit Team Settings</a>
         <% if !@league.draft_completed? %>
-          <a href="<%= draft_league_path(@league.guid) %>">Join Draft Room</a>
+          | <a href="<%= draft_league_path(@league.guid) %>">Join Draft Room</a>
         <% end %>
       <% end %>
     </div>
