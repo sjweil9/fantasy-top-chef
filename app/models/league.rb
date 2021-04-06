@@ -19,11 +19,11 @@ class League < ApplicationRecord
   has_one :draft
   
   def teams_in_rank_order
-    @teams_in_rank_order ||= league_users.joins(:user).order(total_points: :desc).all
+    @teams_in_rank_order ||= calculate_rank_order
   end
 
   def chefs_in_rank_order
-    @chefs_in_rank_order ||= season.chefs.sort_by { |chef| -scoring_system.season_points_for(chef) }
+    @chefs_in_rank_order ||= calculate_chef_rank_order
   end
 
   def players_in_draft_order
@@ -65,5 +65,30 @@ class League < ApplicationRecord
     return if league_users.count <= max_players
 
     errors.add(:max_players, "cannot be reduced to the requested amount as there are already too many members.")
+  end
+
+  def calculate_rank_order
+    rank = 1
+    current_points = 0
+    league_users.joins(:user).order(total_points: :desc).all.map do |league_user|
+      if league_user.total_points > current_points
+        rank += 1
+        current_points = league_user.total_points
+      end
+      [league_user, rank]
+    end
+  end
+
+  def calculate_chef_rank_order
+    rank = 1
+    current_points = 0
+    season.chefs.sort_by { |chef| [-scoring_system.season_points_for(chef), chef.name.split(" ").last] }.map do |chef|
+      if scoring_system.season_points_for(chef) > current_points
+        rank += 1
+        current_points = scoring_system.season_points_for(chef)
+      end
+      team_name = league_users.detect { |lu| lu.chefs.include?(chef) }.team_name
+      [chef, team_name, scoring_system.season_points_for(chef), rank]
+    end
   end
 end

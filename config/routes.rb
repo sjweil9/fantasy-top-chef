@@ -4,14 +4,8 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create', as: 'register'
   post '/sessions', to: 'sessions#create', as: 'login'
 
-  resources :leagues, only: %i[index show create edit update] do
-    member do
-      get :join
-      get :draft
-      post :randomize_draft_order
-    end
-    resources :teams, only: %i[show create]
-  end
+  get '/chef_leaderboard', to: 'leagues#chef_leaderboard', as: 'chef_leaderboard'
+  get '/weekly_breakdown', to: 'leagues#weekly_breakdown', as: 'weekly_breakdown'
 
   devise_for :users
 

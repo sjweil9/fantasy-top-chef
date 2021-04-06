@@ -1,23 +1,23 @@
 <div class="container-fluid">
   <div class="row justify-content-center margin-below">
     <div class="col-xs-12 col-lg-6">
-      <h1>Team Leaderboard</h1>
+      <h1>Chef Leaderboard</h1>
       <table class="table table-striped">
         <thead>
         <tr>
           <th scope="col">Rank</th>
+          <th scope="col">Chef</th>
           <th scope="col">Team</th>
-          <th scope="col">Chefs</th>
           <th scope="col">Points</th>
         </tr>
         </thead>
         <tbody>
-        <% @league.teams_in_rank_order.each do |team, rank| %>
+        <% @league.chefs_in_rank_order.each do |chef, team_name, points, rank| %>
           <tr>
             <th scope="row"><%= rank.ordinalize %></th>
-            <th><%= team.team_name %></th>
-            <th><%= team.chefs.map(&:name).join(" / ") %></th>
-            <th><%= team.total_points %></th>
+            <th><%= render "shared/chef_link", chef: chef %></th>
+            <th><%= team_name %></th>
+            <th><%= points %></th>
           </tr>
         <% end %>
         </tbody>

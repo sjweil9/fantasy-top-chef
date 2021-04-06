@@ -7,10 +7,20 @@
     <div class="collapse navbar-collapse" id="navbar1">
       <ul class="navbar-nav nav nav-fill w-100">
         <li class="nav-item">
-          <a class="<%= (current_page?(home_path) || current_page?(leagues_path)) ? 'active' : 'nav-item' %> nav-link" href="<%= leagues_path %>">All Leagues</a>
+          <a class="<%= (current_page?(home_path) || current_page?(home_path)) ? 'active' : 'nav-item' %> nav-link" href="<%= home_path %>">Team Leaderboard</a>
         </li>
         <li class="nav-item">
-          <a class="<%= current_page?(destroy_user_session_path) ? 'active' : 'nav-item' %> nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Sign Out</a>
+          <a class="<%= (current_page?(home_path) || current_page?(chef_leaderboard_path)) ? 'active' : 'nav-item' %> nav-link" href="<%= chef_leaderboard_path %>">Chef Leaderboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="<%= (current_page?(home_path) || current_page?(weekly_breakdown_path)) ? 'active' : 'nav-item' %> nav-link" href="<%= weekly_breakdown_path %>">Weekly Breakdown</a>
+        </li>
+        <li class="nav-item">
+          <% if current_user %>
+            <a class="<%= current_page?(destroy_user_session_path) ? 'active' : 'nav-item' %> nav-link" href="<%= destroy_user_session_path %>" data-method="delete">Sign Out</a>
+          <% else %>
+            <a class="<%= current_page?(new_user_session_path) ? 'active' : 'nav-item' %> nav-link" href="<%= new_user_session_path %>">Sign In</a>
+          <% end %>
         </li>
       </ul>
     </div>

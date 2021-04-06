@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :lockable
+         :lockable
 
   has_many :league_users
   has_many :leagues, through: :league_users
