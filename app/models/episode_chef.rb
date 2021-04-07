@@ -2,6 +2,8 @@ class EpisodeChef < ApplicationRecord
   belongs_to :episode
   belongs_to :chef
 
+  before_create :set_defaults!
+
   def qf_winner?
     qf_win
   end
@@ -19,10 +21,26 @@ class EpisodeChef < ApplicationRecord
   end
 
   def elim_bottom?
-    elim_bottom
+    elim_bottom && !eliminated
+  end
+
+  def eliminated?
+    eliminated
   end
 
   def lck_winner?
     lck_win
+  end
+
+  def sweep
+    elim_winner? && qf_winner?
+  end
+
+  private
+
+  def set_defaults!
+    %i[qf_win qf_fav elim_win elim_top elim_bottom lck_win lck_champ champ finale].each do |property|
+      self.send("#{property}=", 0)
+    end
   end
 end

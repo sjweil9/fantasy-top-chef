@@ -3,7 +3,7 @@ class ScoringSystem < ApplicationRecord
   has_many :leagues, through: :league_scoring_system
 
   ALL_CATEGORIES = %i[
-    qf_win qf_fav elim_win elim_top elim_bottom lck_win lck_champ champ finale
+    qf_win qf_fav elim_win elim_top elim_bottom lck_win lck_champ champ finale sweep
   ]
 
   def points_for(episode_chefs)

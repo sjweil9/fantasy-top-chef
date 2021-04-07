@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get '/chef_leaderboard', to: 'leagues#chef_leaderboard', as: 'chef_leaderboard'
   get '/weekly_breakdown', to: 'leagues#weekly_breakdown', as: 'weekly_breakdown'
 
+  resources :seasons, only: %i[show] do
+    resources :episodes, only: %i[edit update]
+  end
+
   devise_for :users
 
   # put this after devise because of /users/sign_in

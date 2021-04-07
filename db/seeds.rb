@@ -58,13 +58,13 @@ league = League.create!(
 )
 
 members = [
-  { name: "Stephen", email: "stephen.weil@gmail.com", chefs: [["Gabriel Pascuzzi", 3], ["Byron Gomez", 12]] },
-  { name: "Ovais", email: "ovaisinamullah@gmail.com", chefs: [["Sara Hauman", 1], ["Avishar Barua", 14]] },
-  { name: "Scott", email: "saherndon@gmail.com", chefs: [["Maria Mazon", 7], ["Sasha Grumman", 8]] },
-  { name: "Mike", email: "mikelacy3@gmail.com", chefs: [["Chris Viaud", 5], ["Kiki Louya", 10]] },
-  { name: "Andrea", email: "andreareed2007@gmail.com", chefs: [["Shota Nakajima", 2], ["Jamie Tran", 13]] },
-  { name: "Ben", email: "sccrrckstr@gmail.com", chefs: [["Gabe Erales", 4], ["Nelson German", 11]] },
-  { name: "Sana", email: "some@email.com", chefs: [["Dawn Burrell", 6], ["Brittanny Anderson", 9]] }
+  { name: "Stephen", email: "stephen.weil@gmail.com", is_admin: true, chefs: [["Gabriel Pascuzzi", 3], ["Byron Gomez", 12]] },
+  { name: "Ovais", email: "ovaisinamullah@gmail.com", is_admin: false, chefs: [["Sara Hauman", 1], ["Avishar Barua", 14]] },
+  { name: "Scott", email: "saherndon@gmail.com", is_admin: false, chefs: [["Maria Mazon", 7], ["Sasha Grumman", 8]] },
+  { name: "Mike", email: "mikelacy3@gmail.com", is_admin: false, chefs: [["Chris Viaud", 5], ["Kiki Louya", 10]] },
+  { name: "Andrea", email: "andreareed2007@gmail.com", is_admin: false, chefs: [["Shota Nakajima", 2], ["Jamie Tran", 13]] },
+  { name: "Ben", email: "sccrrckstr@gmail.com", is_admin: false, chefs: [["Gabe Erales", 4], ["Nelson German", 11]] },
+  { name: "Sana", email: "some@email.com", is_admin: false, chefs: [["Dawn Burrell", 6], ["Brittanny Anderson", 9]] }
 ]
 
 members.each do |member|
@@ -73,5 +73,21 @@ members.each do |member|
   member[:chefs].each do |chef_name, pick_number|
     chef = Chef.find_by(name: chef_name)
     LeagueUserChef.create!(chef: chef, league_user: league_user, pick_number: pick_number)
+  end
+end
+
+episodes = [
+  { season_id: season.id, week: 2, air_date: "4/8/2021", name: "Trouble Brewing" },
+# { season_id: season.id, week: 2, air_date: "4/15/2021", name: "Pan African Portland" },
+# { season_id: season.id, week: 2, air_date: "4/22/2021", name: "Thrown for a Loop" },
+# { season_id: season.id, week: 2, air_date: "4/29/2021", name: "Meet You at the Drive-In" },
+# { season_id: season.id, week: 2, air_date: "5/6/2021", name: "Stumptown U.S.A." },
+# { season_id: season.id, week: 2, air_date: "", name: "" }
+]
+
+episodes.each do |episode|
+  ep_record = Episode.create!(episode)
+  season.chefs.each do |chef|
+    EpisodeChef.create!(episode: ep_record, chef: chef)
   end
 end

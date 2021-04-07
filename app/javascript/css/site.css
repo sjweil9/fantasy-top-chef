@@ -249,6 +249,14 @@ ul.knives li::before {
     background-color: #17a2b8;
 }
 
+.light-green-bg {
+    background-color: #97fc7e;
+}
+
+.light-red-bg {
+    background-color: #f79186;
+}
+
 .pick-order-row {
     margin-bottom: 1.5%;
 }

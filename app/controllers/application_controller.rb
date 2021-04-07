@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
     Thread.current[:current_user] = nil
   end
 
+  def check_admin!
+    return if current_user && current_user.admin?
+
+    flash[:banner_error] = "This page is only accessible by an administrator."
+    redirect_to home_path
+  end
+
   def process_errors(object)
     return unless object&.errors&.messages
 

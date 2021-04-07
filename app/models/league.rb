@@ -69,11 +69,16 @@ class League < ApplicationRecord
 
   def calculate_rank_order
     rank = 1
-    current_points = 0
+    accumulated_at_pos = 0
+    current_points = nil
     league_users.joins(:user).order(total_points: :desc).all.map do |league_user|
-      if league_user.total_points > current_points
-        rank += 1
+      current_points ||= league_user.total_points
+      if league_user.total_points < current_points
+        rank += accumulated_at_pos
         current_points = league_user.total_points
+        accumulated_at_pos = 1
+      else
+        accumulated_at_pos += 1
       end
       [league_user, rank]
     end
@@ -81,11 +86,16 @@ class League < ApplicationRecord
 
   def calculate_chef_rank_order
     rank = 1
-    current_points = 0
+    accumulated_at_pos = 0
+    current_points = nil
     season.chefs.sort_by { |chef| [-scoring_system.season_points_for(chef), chef.name.split(" ").last] }.map do |chef|
-      if scoring_system.season_points_for(chef) > current_points
-        rank += 1
+      current_points ||= scoring_system.season_points_for(chef)
+      if scoring_system.season_points_for(chef) < current_points
+        rank += accumulated_at_pos
         current_points = scoring_system.season_points_for(chef)
+        accumulated_at_pos = 1
+      else
+        accumulated_at_pos += 1
       end
       team_name = league_users.detect { |lu| lu.chefs.include?(chef) }.team_name
       [chef, team_name, scoring_system.season_points_for(chef), rank]

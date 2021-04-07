@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def is_member?(league)
     LeagueUser.where(league_id: league.id, user_id: id).count.positive?
   end
+
+  def admin?
+    !!is_admin
+  end
 end

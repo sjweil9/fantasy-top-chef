@@ -16,7 +16,7 @@
           <tr>
             <th scope="row"><%= rank.ordinalize %></th>
             <th><%= team.team_name %></th>
-            <th><%= team.chefs.map(&:name).join(" / ") %></th>
+            <th><%= render "shared/chef_link", chef: team.chefs.first %> / <%= render "shared/chef_link", chef: team.chefs.last %></th>
             <th><%= team.total_points %></th>
           </tr>
         <% end %>
