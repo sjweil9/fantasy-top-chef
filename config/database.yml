@@ -83,3 +83,5 @@ production:
   database: fantasy_top_chef_production
   username: fantasy_top_chef
   password: <%= ENV['FANTASY_TOP_CHEF_DATABASE_PASSWORD'] %>
+  host: localhost
+  pool: 5
