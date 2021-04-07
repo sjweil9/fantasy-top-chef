@@ -1,11 +1,10 @@
 class LeaguesController < ApplicationController
   before_action :league
 
-  def index
+  def team_leaderboard
   end
 
   def chef_leaderboard
-
   end
 
   def weekly_breakdown
