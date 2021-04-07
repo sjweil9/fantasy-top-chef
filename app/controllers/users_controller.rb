@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[create]
+  #skip_before_action :authenticate_user!, only: %i[create]
 
   def create
     @user = User.new(new_user_params)
