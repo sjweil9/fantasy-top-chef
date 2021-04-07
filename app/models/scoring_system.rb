@@ -16,4 +16,17 @@ class ScoringSystem < ApplicationRecord
     @memoized_results ||= {}
     @memoized_results[chef.id.to_s] ||= points_for(chef.episode_chefs)
   end
+
+  def episode_points_for(chef, episode)
+    @memoized_results ||= {}
+    @memoized_results[chef.id.to_s] ||= {}
+    @memoized_results[chef.id.to_s][episode.to_s] = episode_points(chef, episode)
+  end
+
+  def episode_points(chef, episode)
+    ec = Episode.find_by(season_id: Season.last.id, week: episode)&.episode_chefs&.select { |ec| ec.chef_id == chef.id  }
+    return "-" unless ec
+
+    points_for(ec)
+  end
 end
