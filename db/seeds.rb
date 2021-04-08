@@ -78,16 +78,13 @@ end
 
 episodes = [
   { season_id: season.id, week: 2, air_date: "4/8/2021", name: "Trouble Brewing" },
-# { season_id: season.id, week: 2, air_date: "4/15/2021", name: "Pan African Portland" },
-# { season_id: season.id, week: 2, air_date: "4/22/2021", name: "Thrown for a Loop" },
-# { season_id: season.id, week: 2, air_date: "4/29/2021", name: "Meet You at the Drive-In" },
-# { season_id: season.id, week: 2, air_date: "5/6/2021", name: "Stumptown U.S.A." },
+  { season_id: season.id, week: 2, air_date: "4/15/2021", name: "Pan African Portland" },
+  { season_id: season.id, week: 2, air_date: "4/22/2021", name: "Thrown for a Loop" },
+  { season_id: season.id, week: 2, air_date: "4/29/2021", name: "Meet You at the Drive-In" },
+  { season_id: season.id, week: 2, air_date: "5/6/2021", name: "Stumptown U.S.A." },
 # { season_id: season.id, week: 2, air_date: "", name: "" }
 ]
 
 episodes.each do |episode|
   ep_record = Episode.create!(episode)
-  season.chefs.each do |chef|
-    EpisodeChef.create!(episode: ep_record, chef: chef)
-  end
 end

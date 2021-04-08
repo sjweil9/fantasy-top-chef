@@ -33,4 +33,8 @@ class Episode < ApplicationRecord
   def sweep?
     elim_winner == quickfire_winner
   end
+
+  def completed?
+    episode_chefs.present?
+  end
 end

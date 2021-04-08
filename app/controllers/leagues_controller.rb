@@ -9,6 +9,7 @@ class LeaguesController < ApplicationController
 
   def weekly_breakdown
     @episode = Episode.find_by(season_id: league.season.id, week: week_num)
+    @episode = nil unless @episode&.completed?
     flash[:banner_error] = "Results are not yet available for week #{week_num}." unless @episode
   end
 

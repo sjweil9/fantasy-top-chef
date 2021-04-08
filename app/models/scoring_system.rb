@@ -25,7 +25,7 @@ class ScoringSystem < ApplicationRecord
 
   def episode_points(chef, episode)
     ec = Episode.find_by(season_id: Season.last.id, week: episode)&.episode_chefs&.select { |ec| ec.chef_id == chef.id  }
-    return "-" unless ec
+    return "-" unless ec.present?
 
     points_for(ec)
   end

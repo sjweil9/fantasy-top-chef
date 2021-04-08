@@ -36,12 +36,7 @@ class EpisodesController < ApplicationController
   end
 
   def update_episode_scoring!
-    EpisodeChef
-      .where(id: episode.episode_chefs.map(&:id))
-      .update_all(
-        qf_win: false, qf_fav: false, elim_win: false, elim_top: false, elim_bottom: false, lck_win: false,
-        finale: false, champ: false, lck_champ: false, eliminated: false
-      )
+    episode.episode_chefs.present? ? reset_episode_chefs! : create_episode_chefs!
     %i[qf_winner qf_fav elim_winner elim_fav elim_bottom lck_winner champ lck_champ eliminated].each do |key|
       params[key] = (params[key].is_a?(Array) ? params[key].map(&:to_i) : params[key].to_i)
     end
@@ -58,6 +53,21 @@ class EpisodesController < ApplicationController
 
     update_total_points!
     send_notification_email!
+  end
+
+  def reset_episode_chefs!
+    EpisodeChef
+      .where(id: episode.episode_chefs.map(&:id))
+      .update_all(
+        qf_win: false, qf_fav: false, elim_win: false, elim_top: false, elim_bottom: false, lck_win: false,
+        finale: false, champ: false, lck_champ: false, eliminated: false
+      )
+  end
+
+  def create_episode_chefs!
+    episode.season.chefs.each do |chef|
+      EpisodeChef.create!(chef: chef, episode: episode)
+    end
   end
 
   def update_total_points!
