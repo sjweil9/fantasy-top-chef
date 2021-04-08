@@ -40,6 +40,7 @@ class EpisodesController < ApplicationController
     %i[qf_winner qf_fav elim_winner elim_fav elim_bottom lck_winner champ lck_champ eliminated].each do |key|
       params[key] = (params[key].is_a?(Array) ? params[key].map(&:to_i) : params[key].to_i)
     end
+    episode.reload
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:qf_winner] }&.update_attributes(qf_win: true)
     episode.episode_chefs.select { |ec| params[:qf_fav].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(qf_fav: true) }
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:elim_winner] }&.update_attributes(elim_win: true)

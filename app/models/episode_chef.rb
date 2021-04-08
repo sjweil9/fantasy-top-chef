@@ -36,6 +36,14 @@ class EpisodeChef < ApplicationRecord
     elim_winner? && qf_winner?
   end
 
+  def weekly_breakdown_color
+    return "light-red-bg" if eliminated?
+    return "light-yellow-bg" if sweep
+    return "light-blue-bg" if qf_winner?
+
+    "light-green-bg" if elim_winner?
+  end
+
   private
 
   def set_defaults!

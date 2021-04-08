@@ -2,6 +2,20 @@
   <div class="row justify-content-center margin-below">
     <div class="col-xs-12 col-lg-9">
       <h1>Weekly Breakdown</h1>
+      <div class="margin-below">
+        <span class="badge light-red-bg">
+          Eliminated
+        </span>
+        <span class="badge light-green-bg">
+          Elim Winner
+        </span>
+        <span class="badge light-blue-bg">
+          QF Winner
+        </span>
+        <span class="badge light-yellow-bg">
+          Episode Sweep
+        </span>
+      </div>
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -20,7 +34,7 @@
           <tr>
             <th scope="row"><%= render "shared/chef_link", chef: chef %></th>
             <% (2..13).each do |episode| %>
-              <th><%= @league.scoring_system.episode_points_for(chef, episode) %></th>
+              <th class="<%= chef.episode_for(episode)&.weekly_breakdown_color %>"><%= @league.scoring_system.episode_points_for(chef, episode) %></th>
             <% end %>
           </tr>
         <% end %>
