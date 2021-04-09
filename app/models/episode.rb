@@ -2,27 +2,27 @@ class Episode < ApplicationRecord
   belongs_to :season
   has_many :episode_chefs
 
-  def quickfire_winner
-    episode_chefs.detect(&:qf_winner?)&.chef
+  def quickfire_winners
+    episode_chefs.select(&:qf_winner?).map(&:chef)
   end
 
   def quickfire_runners_up
     episode_chefs.select(&:qf_runner_up?).map(&:chef)
   end
 
-  def elim_winner
-    episode_chefs.detect(&:elim_winner?)&.chef
+  def elim_winners
+    episode_chefs.select(&:elim_winner?).map(&:chef)
   end
 
   def elim_runners_up
     episode_chefs.select(&:elim_runner_up?).map(&:chef)
   end
 
-  def eliminated_chef
-    episode_chefs.detect(&:eliminated?)&.chef
+  def eliminated_chefs
+    episode_chefs.select(&:eliminated?).map(&:chef)
   end
 
-  def elim_bottom_chefs
+  def elim_bottom_chefse
     episode_chefs.select(&:elim_bottom?).map(&:chef)
   end
 
@@ -31,7 +31,7 @@ class Episode < ApplicationRecord
   end
 
   def sweep?
-    elim_winner == quickfire_winner
+    elim_winners == quickfire_winners
   end
 
   def completed?

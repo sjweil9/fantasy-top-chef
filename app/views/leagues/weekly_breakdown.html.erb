@@ -51,7 +51,9 @@
             <b>Quickfire Favorites</b>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item light-green-bg"><%= render "shared/chef_link", chef: @episode.quickfire_winner %> (Winner)</li>
+            <% @episode.quickfire_winners.each do |chef| %>
+              <li class="list-group-item light-green-bg"><%= render "shared/chef_link", chef: chef %> (Winner)</li>
+            <% end %>
             <% @episode.quickfire_runners_up.each do |chef| %>
               <li class="list-group-item"><%= render "shared/chef_link", chef: chef %></li>
             <% end %>
@@ -66,7 +68,9 @@
             <b>Elim Favorites</b>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item light-green-bg"><%= render "shared/chef_link", chef: @episode.elim_winner %> <%= @episode.sweep? ? "(Episode Sweep)" : "(Winner)" %></li>
+            <% @episode.elim_winners.each do |chef| %>
+              <li class="list-group-item light-green-bg"><%= render "shared/chef_link", chef: chef %> <%= @episode.sweep? ? "(Episode Sweep)" : "(Winner)" %></li>
+            <% end %>
             <% @episode.elim_runners_up.each do |chef| %>
               <li class="list-group-item"><%= render "shared/chef_link", chef: chef %></li>
             <% end %>
@@ -81,7 +85,9 @@
             <b>Elim Bottom</b>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item light-red-bg"><%= render "shared/chef_link", chef: @episode.eliminated_chef %> (Eliminated)</li>
+            <% @episode.eliminated_chefs.each do |chef| %>
+              <li class="list-group-item light-red-bg"><%= render "shared/chef_link", chef: chef %> (Eliminated)</li>
+            <% end %>
             <% @episode.elim_bottom_chefs.each do |chef| %>
               <li class="list-group-item"><%= render "shared/chef_link", chef: chef %></li>
             <% end %>
