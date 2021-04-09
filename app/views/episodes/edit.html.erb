@@ -8,7 +8,7 @@
         <div class="form-group row">
           <label class="col-sm-5 col-form-label" for="qf_winner">Quickfire Winner:</label>
           <div class="col-sm-7">
-            <select class="mr-sm-2" name="qf_winner" id="qf_winner">
+            <select class="mr-sm-2" name="qf_winner[]" id="qf_winner" multiple>
               <% @episode.season.chefs.each do |chef| %>
                 <option value="<%= chef.id %>"><%= chef.name %></option>
               <% end %>
@@ -28,7 +28,7 @@
         <div class="form-group row">
           <label class="col-sm-5 col-form-label" for="elim_winner">Elim Winner:</label>
           <div class="col-sm-7">
-            <select class="mr-sm-2" name="elim_winner" id="elim_winner">
+            <select class="mr-sm-2" name="elim_winner[]" id="elim_winner" multiple>
               <% @episode.season.chefs.each do |chef| %>
                 <option value="<%= chef.id %>"><%= chef.name %></option>
               <% end %>

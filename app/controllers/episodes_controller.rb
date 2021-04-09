@@ -41,9 +41,9 @@ class EpisodesController < ApplicationController
       params[key] = (params[key].is_a?(Array) ? params[key].map(&:to_i) : params[key].to_i)
     end
     episode.reload
-    episode.episode_chefs.detect { |ec| ec.chef_id == params[:qf_winner] }&.update_attributes(qf_win: true)
+    episode.episode_chefs.select { |ec| params[:qf_winner].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(qf_win: true) }
     episode.episode_chefs.select { |ec| params[:qf_fav].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(qf_fav: true) }
-    episode.episode_chefs.detect { |ec| ec.chef_id == params[:elim_winner] }&.update_attributes(elim_win: true)
+    episode.episode_chefs.select { |ec| params[:elim_winner].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(elim_win: true) }
     episode.episode_chefs.select { |ec| params[:elim_fav].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(elim_top: true) }
     episode.episode_chefs.select { |ec| params[:elim_bottom].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(elim_bottom: true) }
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:lck_winner] }&.update_attributes(lck_win: true)
