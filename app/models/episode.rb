@@ -22,7 +22,7 @@ class Episode < ApplicationRecord
     episode_chefs.select(&:eliminated?).map(&:chef)
   end
 
-  def elim_bottom_chefse
+  def elim_bottom_chefs
     episode_chefs.select(&:elim_bottom?).map(&:chef)
   end
 
