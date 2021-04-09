@@ -44,6 +44,24 @@ class EpisodeChef < ApplicationRecord
     "light-green-bg" if elim_winner?
   end
 
+  CATEGORY_MAPPING = {
+    qf_win: "QF Win",
+    qf_fav: "QF Fav",
+    elim_win: "Elim Win",
+    elim_top: "Elim Top",
+    elim_bottom: "Elim Bottom",
+    lck_win: "LCK Win",
+    sweep: "Sweep"
+  }
+
+  def weekly_breakdown_text(league)
+    %i[qf_win qf_fav elim_win elim_top elim_bottom lck_win sweep].map do |category|
+      points = send(category) ? league.scoring_system.send("#{category}_pts") : next
+      sign = points.positive? ? "+" : ""
+      category ? "#{CATEGORY_MAPPING[category]}: #{sign}#{points}" : nil
+    end.compact
+  end
+
   private
 
   def set_defaults!

@@ -75,6 +75,10 @@ ul.horizontal_list > li {
     margin-bottom: 1vh;
 }
 
+.toggle-link {
+    color: black;
+}
+
 h1.line-below {
     border-bottom: 1vh black;
 }

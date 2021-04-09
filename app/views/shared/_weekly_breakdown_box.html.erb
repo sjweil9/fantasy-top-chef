@@ -1,0 +1,13 @@
+<a href="#" class="toggle-link" data-toggle="modal" data-target="#breakdown_box<%= episode_chef.id %>"><%= league.scoring_system.episode_points_for(episode_chef.chef, episode_chef.episode.week) %></a>
+
+<div class="modal fade" id="breakdown_box<%= episode_chef.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <% episode_chef.weekly_breakdown_text(league).each do |text| %>
+          <p><%= text.html_safe %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

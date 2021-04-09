@@ -10,6 +10,7 @@ require('jquery')
 require("channels")
 require("packs/welcome")
 require("packs/expand")
+require("packs/popover")
 
 import '../css/site.css'
 import 'bootstrap'

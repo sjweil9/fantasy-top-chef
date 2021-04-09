@@ -34,7 +34,13 @@
           <tr>
             <th scope="row"><%= render "shared/chef_link", chef: chef %></th>
             <% (2..13).each do |episode| %>
-              <th class="<%= chef.episode_for(episode)&.weekly_breakdown_color %>"><%= @league.scoring_system.episode_points_for(chef, episode) %></th>
+              <th class="<%= chef.episode_for(episode)&.weekly_breakdown_color %>">
+                <% if chef.episode_for(episode) %>
+                  <%= render "shared/weekly_breakdown_box", episode_chef: chef.episode_for(episode), league: @league %>
+                <% else %>
+                  -
+                <% end %>
+              </th>
             <% end %>
           </tr>
         <% end %>
