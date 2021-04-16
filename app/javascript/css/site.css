@@ -79,6 +79,14 @@ ul.horizontal_list > li {
     color: black;
 }
 
+img.arrow {
+    width: 1.25vh;
+    height: 1.25vh;
+    position: relative;
+    top: 50%;
+    transform: translateY(-15%);
+}
+
 h1.line-below {
     border-bottom: 1vh black;
 }

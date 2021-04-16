@@ -18,4 +18,28 @@ class LeagueUser < ApplicationRecord
       sum + league.scoring_system.season_points_for(chef)
     end
   end
+
+  def last_week_diff
+    @last_week_diff ||= calculate_last_week_diff || 0.0
+  end
+
+  def calculate_last_week_diff
+    league.scoring_system.points_for(episode_chefs.select { |ec| ec.episode.week == most_recent_episode_week })
+  end
+
+  def most_recent_episode_week
+    @most_recent_episode_week ||= Episode.last.week
+  end
+
+  def last_week_diff_icon
+    return if last_week_diff.zero?
+
+    last_week_diff.positive? ? "upvote.png" : "downvote.png"
+  end
+
+  def last_week_diff_color
+    return if last_week_diff.zero?
+
+    last_week_diff.positive? ? "green" : "red"
+  end
 end

@@ -9,6 +9,7 @@
           <th scope="col">Team</th>
           <th scope="col">Chefs</th>
           <th scope="col">Points</th>
+          <th scope="col">Recent Change *</th>
         </tr>
         </thead>
         <tbody>
@@ -18,10 +19,12 @@
             <th><%= team.team_name %></th>
             <th><%= render "shared/chef_link", chef: team.chefs.first %> / <%= render "shared/chef_link", chef: team.chefs.last %></th>
             <th><%= team.total_points %></th>
+            <th class="<%= team.last_week_diff_color %>"><% unless team.last_week_diff.zero? %><%= image_pack_tag team.last_week_diff_icon, class: "arrow" %> <% end %><%= team.last_week_diff %></th>
           </tr>
         <% end %>
         </tbody>
       </table>
+      <small>* Change in points from the last week to the most recent one.</small>
     </div>
   </div>
 </div>
