@@ -24,6 +24,6 @@ class LeaguesController < ApplicationController
   end
 
   def current_week
-    league.season.episodes.order(week: :desc).first.week.to_s
+    league.season.episodes.includes(:episode_chefs).order(week: :desc).select(&:completed?).first.week.to_s
   end
 end
