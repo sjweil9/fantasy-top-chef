@@ -28,7 +28,7 @@ class LeagueUser < ApplicationRecord
   end
 
   def most_recent_episode_week
-    @most_recent_episode_week ||= Episode.last.week
+    @most_recent_episode_week ||= Episode.all.select(&:completed?).last.week
   end
 
   def last_week_diff_icon
