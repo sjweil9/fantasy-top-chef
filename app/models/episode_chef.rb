@@ -53,7 +53,7 @@ class EpisodeChef < ApplicationRecord
     elim_bottom: "Elim Bottom",
     lck_win: "LCK Win",
     sweep: "Sweep",
-    lck_champion: "LCK Champion"
+    lck_champ: "LCK Champion"
   }
 
   def weekly_breakdown_text(league)
