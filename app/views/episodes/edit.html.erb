@@ -58,8 +58,7 @@
         <div class="form-group row">
           <label class="col-sm-5 col-form-label" for="lck_winner">LCK Winner:</label>
           <div class="col-sm-7">
-            <select class="mr-sm-2" name="lck_winner" id="lck_winner">
-              <option>None</option>
+            <select class="mr-sm-2" name="lck_winner[]" id="lck_winner" multiple>
               <% @episode.season.chefs.each do |chef| %>
                 <option value="<%= chef.id %>"><%= chef.name %></option>
               <% end %>

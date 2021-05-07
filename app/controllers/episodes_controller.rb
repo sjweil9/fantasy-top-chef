@@ -46,7 +46,7 @@ class EpisodesController < ApplicationController
     episode.episode_chefs.select { |ec| params[:elim_winner].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(elim_win: true) }
     episode.episode_chefs.select { |ec| params[:elim_fav].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(elim_top: true) }
     episode.episode_chefs.select { |ec| params[:elim_bottom].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(elim_bottom: true) }
-    episode.episode_chefs.detect { |ec| ec.chef_id == params[:lck_winner] }&.update_attributes(lck_win: true)
+    episode.episode_chefs.select { |ec| params[:lck_winner].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(lck_win: true) }
     episode.episode_chefs.select { |ec| params[:finale]&.include?(ec.chef_id) }&.each { |ec| ec.update_attributes(finale: true) }
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:champ] }&.update_attributes(champ: true)
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:lck_champ] }&.update_attributes(lck_champ: true)
