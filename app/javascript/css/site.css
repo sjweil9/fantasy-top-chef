@@ -278,7 +278,7 @@ ul.knives li::before {
 }
 
 .split-color-bg {
-    background: linear-gradient(90deg, #74a6fc 50%, #f79186 50%);
+    background: linear-gradient(45deg, #74a6fc 50%, #f79186 50%);
 }
 
 .pick-order-row {
