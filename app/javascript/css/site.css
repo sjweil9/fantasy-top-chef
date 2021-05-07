@@ -277,6 +277,10 @@ ul.knives li::before {
     background-color: #f9ffa1;
 }
 
+.split-color-bg {
+    background: linear-gradient(90deg, #74a6fc 50%, #f79186 50%);
+}
+
 .pick-order-row {
     margin-bottom: 1.5%;
 }
