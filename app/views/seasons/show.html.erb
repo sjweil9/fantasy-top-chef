@@ -2,7 +2,7 @@
   <div class="row justify-content-center margin-below">
     <div class="col-xs-12 col-lg-6">
       <h1>Episodes:</h1>
-      <% (2..13).each do |week| %>
+      <% (2..14).each do |week| %>
         <p><a href="<%= edit_season_episode_path(@season.season_number, week) %>">Episode <%= week %></a></p>
       <% end %>
     </div>
