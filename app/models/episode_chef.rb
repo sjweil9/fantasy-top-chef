@@ -53,11 +53,13 @@ class EpisodeChef < ApplicationRecord
     elim_bottom: "Elim Bottom",
     lck_win: "LCK Win",
     sweep: "Sweep",
-    lck_champ: "LCK Champion"
+    lck_champ: "LCK Champion",
+    finale: "Finale",
+    champ: "Top Chef Champion"
   }
 
   def weekly_breakdown_text(league)
-    %i[qf_win qf_fav elim_win elim_top elim_bottom lck_win sweep lck_champ].map do |category|
+    %i[qf_win qf_fav elim_win elim_top elim_bottom lck_win sweep lck_champ finale champ].map do |category|
       points = send(category) ? league.scoring_system.send("#{category}_pts") : next
       sign = points.positive? ? "+" : ""
       category ? "#{CATEGORY_MAPPING[category]}: #{sign}#{points}" : nil
