@@ -20,7 +20,7 @@
         <thead>
         <tr>
           <th scope="col"></th>
-          <% (2..13).each do |episode| %>
+          <% (2..14).each do |episode| %>
             <% if @week_num.to_i == episode %>
               <th scope="col">Week <%= episode %></th>
             <% else %>
@@ -33,7 +33,7 @@
         <% @league.chefs.each do |chef| %>
           <tr>
             <th scope="row"><%= render "shared/chef_link", chef: chef %></th>
-            <% (2..13).each do |episode| %>
+            <% (2..14).each do |episode| %>
               <th class="<%= chef.episode_for(episode)&.weekly_breakdown_color %>">
                 <% if chef.episode_for(episode) %>
                   <%= render "shared/weekly_breakdown_box", episode_chef: chef.episode_for(episode), league: @league %>
