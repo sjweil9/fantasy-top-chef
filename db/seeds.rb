@@ -5,11 +5,12 @@
 #
 
 top_chef_seasons = [
-  { season_year: 2021, start_date: "2021/04/01", end_date: nil, name: "Portland", season_number: 18, created_at: Time.current, updated_at: Time.current }
+  { season_year: 2021, start_date: "2021/04/01", end_date: nil, name: "Portland", season_number: 18, created_at: Time.current, updated_at: Time.current },
+  { season_year: 2022, start_date: "2021/03/03", end_date: nil, name: "Houston", season_number: 19, created_at: Time.current, updated_at: Time.current }
 ]
 Season.insert_all(top_chef_seasons)
 
-season = Season.find_by(season_year: 2021)
+season = Season.find_by(season_year: 2022)
 
 chefs_2021 = [
   { name: "Brittanny Anderson", city: "Richmond, VA", bio_link: "https://www.bravotv.com/people/brittanny-anderson", job_title: "Chef and Co-Owner of Metzger Bar and Butchery, Brenner Pass, and Black Lodge, Richmond, VA. Leni, Washington, D.C", season_id: season.id, created_at: Time.current, updated_at: Time.current },
@@ -29,7 +30,22 @@ chefs_2021 = [
   { name: "Chris Viaud", city: "Milford, NH", bio_link: "https://www.bravotv.com/people/chris-viaud", job_title: "Chef/Owner of Greenleaf and Culture", season_id: season.id, created_at: Time.current, updated_at: Time.current },
 ]
 
-chefs_2021.each do |chef|
+chefs_2022 = [
+  { name: "Ashleigh Shanti", city: "Virginia Beach, VA", bio_link: "https://www.bravotv.com/people/ashleigh-shanti", job_title: "Chef/Owner, Good Hot Fish", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Buddha Lo", city: "Port Douglas, Australia", bio_link: "https://www.bravotv.com/people/buddha-lo", job_title: "Executive Chef, Marky’s Caviar & Huso", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Damarr Brown", city: "Chicago, IL", bio_link: "https://www.bravotv.com/people/damarr-brown", job_title: "Chef de Cuisine, Virtue", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Evenlyn Garcia", city: "Houston, TX", bio_link: "https://www.bravotv.com/people/evelyn-garcia", job_title: "Chef/Co-Owner, Kin HTX", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Jackson Kalb", city: "Los Angeles, CA", bio_link: "https://www.bravotv.com/people/jackson-kalb", job_title: "Chef/Owner, Jame Enoteca & Ospi; Chef/Partner at Wake & Late", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Jo Chan", city: "Palmdale, California", bio_link: "https://www.bravotv.com/people/jo-chan", job_title: "Executive Chef", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Luke Koplin", city: "Seattle, WA", bio_link: "https://www.bravotv.com/people/luke-kolpin", job_title: "Chef", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Monique Feybesse", city: "San Francisco, CA", bio_link: "https://www.bravotv.com/people/monique-feybesse", job_title: "Chef/Owner of Tarts de Feybesse", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Nick Wallace", city: "Edwards, MS", bio_link: "https://www.bravotv.com/people/nick-wallace", job_title: "Chef, Nick Wallace Culinary", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Robert Hernandez", city: "Downey, CA", bio_link: "https://www.bravotv.com/people/robert-hernandez", job_title: "Private Chef", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Sam Kang", city: "Gardena, California", bio_link: "https://www.bravotv.com/people/sam-kang", job_title: "Chef Educator", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Sarah Welch", city: "Ann Arbor, MI", bio_link: "https://www.bravotv.com/people/sarah-welch", job_title: "Executive Chef, Marrow & Partner, Mink", season_id: season.id, created_at: Time.current, updated_at: Time.current }
+]
+
+chefs_2022.each do |chef|
   Chef.create!(chef)
 end
 
@@ -44,13 +60,14 @@ default_scoring_system = {
   champ_pts: 5.0,
   finale_pts: 5.0,
   sweep_pts: 0.5,
-  name: "Default Scoring"
+  name: "Default Scoring",
+  survival: 0.5
 }
 
 ScoringSystem.create!(default_scoring_system)
 
 league = League.create!(
-  max_players: 7,
+  max_players: 6,
   password: "packurknives",
   password_confirmation: "packurknives",
   season: season,
@@ -58,13 +75,12 @@ league = League.create!(
 )
 
 members = [
-  { name: "Stephen", email: "stephen.weil@gmail.com", is_admin: true, chefs: [["Gabriel Pascuzzi", 3], ["Byron Gomez", 12]] },
-  { name: "Ovais", email: "ovaisinamullah@gmail.com", is_admin: false, chefs: [["Sara Hauman", 1], ["Avishar Barua", 14]] },
-  { name: "Scott", email: "saherndon@gmail.com", is_admin: false, chefs: [["Maria Mazon", 7], ["Sasha Grumman", 8]] },
-  { name: "Mike", email: "mikelacy3@gmail.com", is_admin: false, chefs: [["Chris Viaud", 5], ["Kiki Louya", 10]] },
-  { name: "Andrea", email: "andreareed2007@gmail.com", is_admin: false, chefs: [["Shota Nakajima", 2], ["Jamie Tran", 13]] },
-  { name: "Ben", email: "sccrrckstr@gmail.com", is_admin: false, chefs: [["Gabe Erales", 4], ["Nelson German", 11]] },
-  { name: "Sana", email: "some@email.com", is_admin: false, chefs: [["Dawn Burrell", 6], ["Brittanny Anderson", 9]] }
+  { name: "Stephen", email: "stephen.weil@gmail.com", is_admin: true, chefs: [["Monique Feybesse", 3], ["Nick Wallace", 10]] },
+  { name: "Ovais", email: "ovaisinamullah@gmail.com", is_admin: false, chefs: [["Buddha Lo", 5], ["Sarah Welch", 8]] },
+  { name: "Scott", email: "saherndon@gmail.com", is_admin: false, chefs: [["Damarr Brown", 1], ["Luke Koplin", 12]] },
+  { name: "Andrea", email: "andreareed2007@gmail.com", is_admin: false, chefs: [["Robert Hernandez", 4], ["Jo Chan", 9]] },
+  { name: "Ben", email: "sccrrckstr@gmail.com", is_admin: false, chefs: [["Jackson Kalb", 2], ["Sam Kang", 11]] },
+  { name: "Jessica", email: "some@email.com", is_admin: false, chefs: [["Ashleigh Shanti", 6], ["Evelyn Garcia", 7]] }
 ]
 
 members.each do |member|
@@ -78,10 +94,7 @@ end
 
 episodes = [
   #{ season_id: season.id, week: 2, air_date: "4/8/2021", name: "Trouble Brewing" },
-  { season_id: season.id, week: 3, air_date: "4/15/2021", name: "Pan African Portland" },
-  { season_id: season.id, week: 4, air_date: "4/22/2021", name: "Thrown for a Loop" },
-  { season_id: season.id, week: 5, air_date: "4/29/2021", name: "Meet You at the Drive-In" },
-  { season_id: season.id, week: 6, air_date: "5/6/2021", name: "Stumptown U.S.A." },
+  { season_id: season.id, week: 3, air_date: "3/17/2022", name: "Noodles and Rice and Everything Nice" },
 # { season_id: season.id, week: 2, air_date: "", name: "" }
 ]
 
