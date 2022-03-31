@@ -84,7 +84,8 @@ members = [
 ]
 
 members.each do |member|
-  user = User.create!(member.except(:chefs).merge(password: "packurknives", password_confirmation: "packurknives"))
+  user = User.find_by(email: member[:email])
+  user ||= User.create!(member.except(:chefs).merge(password: "packurknives", password_confirmation: "packurknives"))
   league_user = LeagueUser.create!(league: league, user: user, team_name: "#{user.name}'s Team", is_manager: user.name == "Stephen")
   member[:chefs].each do |chef_name, pick_number|
     chef = Chef.find_by(name: chef_name)
