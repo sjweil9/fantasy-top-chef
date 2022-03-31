@@ -47,7 +47,7 @@ class EpisodesController < ApplicationController
     episode.episode_chefs.select { |ec| params[:elim_fav].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(elim_top: true) } if params[:elim_fav].is_a?(Array)
     episode.episode_chefs.select { |ec| params[:elim_bottom].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(elim_bottom: true) } if params[:elim_bottom].is_a?(Array)
     episode.episode_chefs.select { |ec| params[:lck_winner].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(lck_win: true) } if params[:lck_winner].is_a?(Array)
-    episode.episode_chefs.select { |ec| params[:finale]&.include?(ec.chef_id) }&.each { |ec| ec.update_attributes(finale: true) }
+    episode.episode_chefs.select { |ec| params[:finale]&.include?(ec.chef_id) }&.each { |ec| ec.update_attributes(finale: true) } if params[:finale].is_a?(Array)
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:champ] }&.update_attributes(champ: true)
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:lck_champ] }&.update_attributes(lck_champ: true)
     episode.episode_chefs.select { |ec| params[:eliminated].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(eliminated: true) } if params[:eliminated].is_a?(Array)
