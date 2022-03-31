@@ -34,7 +34,7 @@ chefs_2022 = [
   { name: "Ashleigh Shanti", city: "Virginia Beach, VA", bio_link: "https://www.bravotv.com/people/ashleigh-shanti", job_title: "Chef/Owner, Good Hot Fish", season_id: season.id, created_at: Time.current, updated_at: Time.current },
   { name: "Buddha Lo", city: "Port Douglas, Australia", bio_link: "https://www.bravotv.com/people/buddha-lo", job_title: "Executive Chef, Marky’s Caviar & Huso", season_id: season.id, created_at: Time.current, updated_at: Time.current },
   { name: "Damarr Brown", city: "Chicago, IL", bio_link: "https://www.bravotv.com/people/damarr-brown", job_title: "Chef de Cuisine, Virtue", season_id: season.id, created_at: Time.current, updated_at: Time.current },
-  { name: "Evenlyn Garcia", city: "Houston, TX", bio_link: "https://www.bravotv.com/people/evelyn-garcia", job_title: "Chef/Co-Owner, Kin HTX", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Evelyn Garcia", city: "Houston, TX", bio_link: "https://www.bravotv.com/people/evelyn-garcia", job_title: "Chef/Co-Owner, Kin HTX", season_id: season.id, created_at: Time.current, updated_at: Time.current },
   { name: "Jackson Kalb", city: "Los Angeles, CA", bio_link: "https://www.bravotv.com/people/jackson-kalb", job_title: "Chef/Owner, Jame Enoteca & Ospi; Chef/Partner at Wake & Late", season_id: season.id, created_at: Time.current, updated_at: Time.current },
   { name: "Jo Chan", city: "Palmdale, California", bio_link: "https://www.bravotv.com/people/jo-chan", job_title: "Executive Chef", season_id: season.id, created_at: Time.current, updated_at: Time.current },
   { name: "Luke Koplin", city: "Seattle, WA", bio_link: "https://www.bravotv.com/people/luke-kolpin", job_title: "Chef", season_id: season.id, created_at: Time.current, updated_at: Time.current },
@@ -61,7 +61,7 @@ default_scoring_system = {
   finale_pts: 5.0,
   sweep_pts: 0.5,
   name: "Default Scoring",
-  survival: 0.5
+  survival_pts: 0.5
 }
 
 ScoringSystem.create!(default_scoring_system)
@@ -95,7 +95,7 @@ end
 episodes = [
   #{ season_id: season.id, week: 2, air_date: "4/8/2021", name: "Trouble Brewing" },
   { season_id: season.id, week: 3, air_date: "3/17/2022", name: "Noodles and Rice and Everything Nice" },
-# { season_id: season.id, week: 2, air_date: "", name: "" }
+  { season_id: season.id, week: 4, air_date: "3/24/2022", name: "Doppelgängers" }
 ]
 
 episodes.each do |episode|

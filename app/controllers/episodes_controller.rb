@@ -37,7 +37,7 @@ class EpisodesController < ApplicationController
 
   def update_episode_scoring!
     episode.episode_chefs.present? ? reset_episode_chefs! : create_episode_chefs!
-    %i[qf_winner qf_fav elim_winner elim_fav elim_bottom lck_winner champ lck_champ eliminated finale].each do |key|
+    %i[qf_winner qf_fav elim_winner elim_fav elim_bottom lck_winner champ lck_champ eliminated finale survival].each do |key|
       params[key] = (params[key].is_a?(Array) ? params[key].map(&:to_i) : params[key].to_i)
     end
     episode.reload
@@ -51,6 +51,7 @@ class EpisodesController < ApplicationController
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:champ] }&.update_attributes(champ: true)
     episode.episode_chefs.detect { |ec| ec.chef_id == params[:lck_champ] }&.update_attributes(lck_champ: true)
     episode.episode_chefs.select { |ec| params[:eliminated].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(eliminated: true) } if params[:eliminated].is_a?(Array)
+    episode.episode_chefs.select { |ec| params[:survival].include?(ec.chef_id) }&.each { |ec| ec.update_attributes(survival: true) } if params[:survival].is_a?(Array)
 
     update_total_points!
     send_notification_email!

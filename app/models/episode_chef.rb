@@ -4,6 +4,14 @@ class EpisodeChef < ApplicationRecord
 
   before_create :set_defaults!
 
+  def survival?
+    !eliminated
+  end
+
+  def survival
+    !eliminated
+  end
+
   def qf_winner?
     qf_win
   end
@@ -55,11 +63,12 @@ class EpisodeChef < ApplicationRecord
     sweep: "Sweep",
     lck_champ: "LCK Champion",
     finale: "Finale",
-    champ: "Top Chef Champion"
+    champ: "Top Chef Champion",
+    survival: "Survived"
   }
 
   def weekly_breakdown_text(league)
-    %i[qf_win qf_fav elim_win elim_top elim_bottom lck_win sweep lck_champ finale champ].map do |category|
+    %i[qf_win qf_fav elim_win elim_top elim_bottom lck_win sweep lck_champ finale champ survival].map do |category|
       points = send(category) ? league.scoring_system.send("#{category}_pts") : next
       sign = points.positive? ? "+" : ""
       category ? "#{CATEGORY_MAPPING[category]}: #{sign}#{points}" : nil
