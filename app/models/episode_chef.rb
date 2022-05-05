@@ -13,7 +13,7 @@ class EpisodeChef < ApplicationRecord
   end
 
   def not_previously_eliminated?
-    chef.episode_chefs.where(episode: ec.episode.season.episodes.where("week < ?", ec.episode.week)).none?(&:eliminated?)
+    chef.episode_chefs.where(episode: episode.season.episodes.where("week < ?", episode.week)).none?(&:eliminated?)
   end
 
   def qf_winner?
