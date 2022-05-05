@@ -5,11 +5,15 @@ class EpisodeChef < ApplicationRecord
   before_create :set_defaults!
 
   def survival?
-    !eliminated
+    !eliminated && never_eliminated?
   end
 
   def survival
-    !eliminated
+    !eliminated && never_eliminated?
+  end
+
+  def never_eliminated?
+    chef.episode_chefs.none?(&:eliminated?)
   end
 
   def qf_winner?
