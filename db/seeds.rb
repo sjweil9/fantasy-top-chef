@@ -96,7 +96,7 @@ league = League.create!(
 
 members = [
   { name: "Stephen", email: "stephen.weil@gmail.com", is_admin: true, chefs: [["Begoña Rodrigo", 3], ["Sara Bradley", 12]] },
-  { name: "Ovais", email: "ovaisinamullah@gmail.com", is_admin: false, chefs: [["Buddha Lo", 2], ["Dawn Burrell", 3]] },
+  { name: "Ovais", email: "ovaisinamullah@gmail.com", is_admin: false, chefs: [["Buddha Lo", 2], ["Dawn Burrell", 13]] },
   { name: "Scott", email: "saherndon@gmail.com", is_admin: false, chefs: [["Charbel Hayek", 1], ["Gabri Rodriguez", 14]] },
   { name: "Andrea", email: "andreareed2007@gmail.com", is_admin: false, chefs: [["Dale MacKay", 6], ["Sylwia Stachyra", 10]] },
   { name: "Ben", email: "sccrrckstr@gmail.com", is_admin: false, chefs: [["Tom Goetter", 7], ["Luciana Berry", 8]] },
@@ -109,7 +109,7 @@ members.each do |member|
   user ||= User.create!(member.except(:chefs).merge(password: "packurknives", password_confirmation: "packurknives"))
   league_user = LeagueUser.create!(league: league, user: user, team_name: "#{user.name}'s Team", is_manager: user.name == "Stephen")
   member[:chefs].each do |chef_name, pick_number|
-    chef = Chef.find_by(name: chef_name)
+    chef = Chef.find_by(name: chef_name, season: season)
     LeagueUserChef.create!(chef: chef, league_user: league_user, pick_number: pick_number)
   end
 end
