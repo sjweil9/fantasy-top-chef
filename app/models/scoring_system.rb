@@ -12,9 +12,9 @@ class ScoringSystem < ApplicationRecord
     end
   end
 
-  def season_points_for(chef)
+  def season_points_for(chef, season: Season.last)
     @memoized_results ||= {}
-    @memoized_results[chef.id.to_s] ||= points_for(chef.episode_chefs)
+    @memoized_results[chef.id.to_s] ||= points_for(chef.episode_chefs.for_season(season.id))
   end
 
   def episode_points_for(chef, episode)

@@ -4,6 +4,8 @@ class EpisodeChef < ApplicationRecord
 
   before_create :set_defaults!
 
+  scope :for_season, ->(season_id) { joins(:episode).where(episodes: { season_id: season_id}) }
+
   def survival?
     !eliminated && not_previously_eliminated?
   end
