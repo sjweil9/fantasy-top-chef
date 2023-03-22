@@ -6,11 +6,12 @@
 
 top_chef_seasons = [
   #{ season_year: 2021, start_date: "2021/04/01", end_date: nil, name: "Portland", season_number: 18, created_at: Time.current, updated_at: Time.current },
-  { season_year: 2022, start_date: "2021/03/03", end_date: nil, name: "Houston", season_number: 19, created_at: Time.current, updated_at: Time.current }
+  #{ season_year: 2022, start_date: "2021/03/03", end_date: nil, name: "Houston", season_number: 19, created_at: Time.current, updated_at: Time.current },
+  { season_year: 2023, start_date: "2023/03/09", end_date: nil, name: "London", season_number: 20, created_at: Time.current, updated_at: Time.current }
 ]
 Season.insert_all(top_chef_seasons)
 
-season = Season.find_by(season_year: 2022)
+season = Season.find_by(season_year: 2023)
 
 chefs_2021 = [
   { name: "Brittanny Anderson", city: "Richmond, VA", bio_link: "https://www.bravotv.com/people/brittanny-anderson", job_title: "Chef and Co-Owner of Metzger Bar and Butchery, Brenner Pass, and Black Lodge, Richmond, VA. Leni, Washington, D.C", season_id: season.id, created_at: Time.current, updated_at: Time.current },
@@ -45,7 +46,26 @@ chefs_2022 = [
   { name: "Sarah Welch", city: "Ann Arbor, MI", bio_link: "https://www.bravotv.com/people/sarah-welch", job_title: "Executive Chef, Marrow & Partner, Mink", season_id: season.id, created_at: Time.current, updated_at: Time.current }
 ]
 
-chefs_2022.each do |chef|
+chefs_2023 = [
+  { name: "Samuel Albert", city: "Angers, France", bio_link: "https://www.bravotv.com/people/samuel-albert", job_title: "Executive Chef/Owner, Les Petits Prés", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Buddha Lo", city: "Port Douglas, Australia", bio_link: "https://www.bravotv.com/people/buddha-lo", job_title: "Executive Chef, Marky’s Caviar & Huso", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Luciana Berry", city: "London, United Kingdom", bio_link: "https://www.bravotv.com/people/luciana-berry", job_title: "Owner, Catering on the Hill", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Sara Bradley", city: "Paducah, KY", bio_link: "https://www.bravotv.com/people/sara-bradley", job_title: "Chef/Owner, freight house", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Dawn Burrell", city: "Houston, TX", bio_link: "https://www.bravotv.com/people/dawn-burrell", job_title: "Partner/Executive Chef, Lucille's Hospitality Group", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Ali Ghzawi", city: "Amman, Jordan", bio_link: "https://www.bravotv.com/people/ali-ghzawi", job_title: "Chef/Owner, Alee", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Tom Goetter", city: "Mainz, Germany", bio_link: "https://www.bravotv.com/people/tom-goetter", job_title: "Executive Chef/Director, Food & Beverage Scenic Luxury Cruises Ocean", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Nicole Gomes", city: "Vancouver, British Columbia, Canada", bio_link: "https://www.bravotv.com/people/nicole-gomes", job_title: "Executive Chef/Owner, Cluck ‘N’ Cleaver", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Victoire Gouloubi", city: "Milan, Italy", bio_link: "https://www.bravotv.com/people/victoire-gouloubi", job_title: "Private Chef", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Charbel Hayek", city: "Lake Worth, Florida", bio_link: "https://www.bravotv.com/people/charbel-hayek", job_title: "Private Chef", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Dale MacKay", city: "Saskatoon, Saskatchewan, Canada", bio_link: "https://www.bravotv.com/people/dale-mackay", job_title: "Chef/Co-Owner, Grassroots Restaurant Group", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "May Phattanant Thongthong", city: "Bangkok, Thailand", bio_link: "https://www.bravotv.com/people/may-phattanant-thongthong", job_title: "Executive Chef & Co-Partner, MAZE Dining", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Begoña Rodrigo", city: "Valencia, Spain", bio_link: "https://www.bravotv.com/people/begona-rodrigo", job_title: "Executive Chef/Owner, La Salita", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Gabri Rodriguez", city: "Madrid, Spain", bio_link: "https://www.bravotv.com/people/gabriel-rodriguez", job_title: "Private Chef", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Amar Santana", city: "Santa Ana, CA", bio_link: "https://www.bravotv.com/people/amar-santana", job_title: "Executive Chef/Owner, Broadway by Amar Santana in Laguna Beach, California and Vaca Restaurant in Costa Mesa, California", season_id: season.id, created_at: Time.current, updated_at: Time.current },
+  { name: "Sylwia Stachyra", city: "Lublin, Poland", bio_link: "https://www.bravotv.com/people/sylwia-stachyra", job_title: "Owner, CookShe", season_id: season.id, created_at: Time.current, updated_at: Time.current }
+]
+
+chefs_2023.each do |chef|
   Chef.create!(chef)
 end
 
@@ -67,7 +87,7 @@ default_scoring_system = {
 ScoringSystem.create!(default_scoring_system)
 
 league = League.create!(
-  max_players: 6,
+  max_players: 7,
   password: "packurknives",
   password_confirmation: "packurknives",
   season: season,
@@ -75,12 +95,13 @@ league = League.create!(
 )
 
 members = [
-  { name: "Stephen", email: "stephen.weil@gmail.com", is_admin: true, chefs: [["Monique Feybesse", 3], ["Nick Wallace", 10]] },
-  { name: "Ovais", email: "ovaisinamullah@gmail.com", is_admin: false, chefs: [["Buddha Lo", 5], ["Sarah Welch", 8]] },
-  { name: "Scott", email: "saherndon@gmail.com", is_admin: false, chefs: [["Damarr Brown", 1], ["Luke Koplin", 12]] },
-  { name: "Andrea", email: "andreareed2007@gmail.com", is_admin: false, chefs: [["Robert Hernandez", 4], ["Jo Chan", 9]] },
-  { name: "Ben", email: "sccrrckstr@gmail.com", is_admin: false, chefs: [["Jackson Kalb", 2], ["Sam Kang", 11]] },
-  { name: "Jessica", email: "some@email.com", is_admin: false, chefs: [["Ashleigh Shanti", 6], ["Evelyn Garcia", 7]] }
+  { name: "Stephen", email: "stephen.weil@gmail.com", is_admin: true, chefs: [["Begoña Rodrigo", 3], ["Sara Bradley", 12]] },
+  { name: "Ovais", email: "ovaisinamullah@gmail.com", is_admin: false, chefs: [["Buddha Lo", 2], ["Dawn Burrell", 3]] },
+  { name: "Scott", email: "saherndon@gmail.com", is_admin: false, chefs: [["Charbel Hayek", 1], ["Gabri Rodriguez", 14]] },
+  { name: "Andrea", email: "andreareed2007@gmail.com", is_admin: false, chefs: [["Dale MacKay", 6], ["Sylwia Stachyra", 10]] },
+  { name: "Ben", email: "sccrrckstr@gmail.com", is_admin: false, chefs: [["Tom Goetter", 7], ["Luciana Berry", 8]] },
+  { name: "Jessica", email: "some@email.com", is_admin: false, chefs: [["Amar Santana", 4], ["Nicole Gomes", 11]] },
+  { name: "Sam", email: "some2@email.com", is_admin: false, chefs: [["Ali Ghzawi", 5], ["May Phattanant Thongthong", 10]] }
 ]
 
 members.each do |member|
@@ -94,11 +115,9 @@ members.each do |member|
 end
 
 episodes = [
-  #{ season_id: season.id, week: 2, air_date: "4/8/2021", name: "Trouble Brewing" },
-  { season_id: season.id, week: 3, air_date: "3/17/2022", name: "Noodles and Rice and Everything Nice" },
-  { season_id: season.id, week: 4, air_date: "3/24/2022", name: "Doppelgängers" }
+  { season_id: season.id, week: 2, air_date: "3/16/2023", name: "Rice Rice, Baby" },
 ]
 
 episodes.each do |episode|
-  ep_record = Episode.create!(episode)
+  Episode.create!(episode)
 end

@@ -16,7 +16,7 @@ class LeaguesController < ApplicationController
   private
 
   def league
-    @league ||= League.find_by(name: "Westhoochingdallas", season_id: Season.where(season_year: params[:year] || 2022).select(:id))
+    @league ||= League.find_by(name: "Westhoochingdallas", season_id: Season.where(season_year: params[:year] || 2023).select(:id))
   end
 
   def week_num
