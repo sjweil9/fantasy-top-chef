@@ -27,7 +27,12 @@ class Episode < ApplicationRecord
   end
 
   def lck_winner
+    # TODO: check for usage and remove (deprecated)
     episode_chefs.detect(&:lck_winner?)&.chef
+  end
+
+  def lck_winners
+    episode_chefs.select(&:lck_winner?)&.map(&:chef)
   end
 
   def sweep?

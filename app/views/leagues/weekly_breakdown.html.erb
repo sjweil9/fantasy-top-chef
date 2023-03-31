@@ -101,15 +101,17 @@
         </div>
       </div>
     </div>
-    <% if @episode.lck_winner %>
+    <% if @episode.lck_winners.present? %>
       <div class="row justify-content-center margin-below">
         <div class="col-xs-12 col-lg-6">
           <div class="card" style="width: 30rem;">
             <div class="card-header">
-              <b>Last Chance Kitchen Winner</b>
+              <b>Last Chance Kitchen Winner(s)</b>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item light-green-bg"><%= render "shared/chef_link", chef: @episode.lck_winner %></li>
+              <% @episode.lck_winners.each do |chef| %>
+                <li class="list-group-item light-green-bg"><%= render "shared/chef_link", chef: chef %></li>
+              <% end %>
             </ul>
           </div>
         </div>
