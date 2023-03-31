@@ -2,6 +2,8 @@ class EpisodesController < ApplicationController
   before_action :check_season!
   before_action :check_episode!
 
+  def new; end
+
   def edit
   end
 

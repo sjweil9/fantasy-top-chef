@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get '/weekly_breakdown', to: 'leagues#weekly_breakdown', as: 'weekly_breakdown'
 
     resources :seasons, only: %i[show] do
-      resources :episodes, only: %i[edit update]
+      resources :episodes, only: %i[edit update new create]
     end
 
     devise_for :users
