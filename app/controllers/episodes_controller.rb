@@ -1,8 +1,18 @@
 class EpisodesController < ApplicationController
   before_action :check_season!
-  before_action :check_episode!
+  before_action :check_episode!, only: %i[edit update]
 
   def new; end
+
+  def create
+    @episode = Episode.new(episode_params)
+    if @episode.save
+      redirect_to home_path
+    else
+      flash[:banner_error] = "Failed to create episode: #{@episode.errors.full_messages}"
+      redirect_to home_path
+    end
+  end
 
   def edit
   end
@@ -81,5 +91,9 @@ class EpisodesController < ApplicationController
 
   def send_notification_email!
     # TODO: implement
+  end
+
+  def episode_params
+    params.permit(:name, :air_date, :week, :season_id)
   end
 end
