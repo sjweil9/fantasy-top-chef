@@ -94,6 +94,6 @@ class EpisodesController < ApplicationController
   end
 
   def episode_params
-    params.permit(:name, :air_date, :week, :season_id)
+    params.permit(:name, :air_date, :week).merge(season_id: season.id)
   end
 end
