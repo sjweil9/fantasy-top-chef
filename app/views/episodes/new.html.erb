@@ -2,7 +2,7 @@
   <div class="row justify-content-center margin-below">
     <div class="col-xs-12 col-lg-6">
       <h1>Season <%= @season.season_number %></h1>
-      <form action="<%= season_episodes_path(@episode.season.season_number) %>" method="post">
+      <form action="<%= season_episodes_path(@season.season_number) %>" method="post">
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <div class="form-group row">
           <label class="col-sm-5 col-form-label" for="name">Episode Name:</label>
